@@ -8,7 +8,7 @@ body {
 }
 
 #canvas {
-    touch-action: auto;
+    touch-action: none;
 }
 
 #radial-blur-mask {
