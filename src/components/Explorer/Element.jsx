@@ -6,7 +6,6 @@ import Content from "./Content";
 import InputController from "./InputController";
 
 function Element({ position, image, details }) {
-    console.log(position)
     return (
         <>
             <mesh scale={[200, 200, 0]} position={[position.x, position.y, 1]}>

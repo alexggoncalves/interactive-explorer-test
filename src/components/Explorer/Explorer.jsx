@@ -6,14 +6,13 @@ import Content from "./Content";
 import InputController from "./InputController";
 
 function Explorer() {
-    const cameraRef = useRef()
-
     return (
         <div id="explorer">
-            <Canvas id="canvas">
-                <OrthographicCamera makeDefault position={[0, 0, 10]} ref={cameraRef}/>
+            <Canvas id="canvas" >
+
+                <OrthographicCamera makeDefault position={[0, 0, 10]} />
                 <ambientLight intensity={6} />
-                <InputController camera={cameraRef}>
+                <InputController>
                     <Content />
                 </InputController>
             </Canvas>

@@ -1,16 +1,21 @@
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrthographicCamera } from "@react-three/drei";
-import { useEffect, useState } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useState } from "react";
 import { Vector3 } from "three";
 import { lerp } from "three/src/math/MathUtils";
+import { useGesture, usePinch } from '@use-gesture/react'
 
-const minZoom = 0.4
-const maxZoom = 2.5
-const zoomSpeed = 0.0005
-const panSpeed = 0.8
+const minZoom = 0.4;
+const maxZoom = 2.5;
+const zoomSpeed = 0.0005;
+const panSpeed = 0.8;
 
-function InputController({camera,children}) {
-    const {size} = useThree()
+function InputController({ canvasRef, children }) {
+    const pinch = usePinch((state) => {
+        zoom=6
+    } ) 
+
+    const { size } = useThree();
+    console.log(useThree())
 
     const [isDragging, setDragging] = useState(false);
     const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
@@ -24,9 +29,9 @@ function InputController({camera,children}) {
     const updateZoom = (e) => {
         let newZoom = zoom - e.deltaY * zoomSpeed;
 
-        if(newZoom < minZoom) newZoom = minZoom
-        if(newZoom > maxZoom) newZoom = maxZoom
-        setZoom(newZoom)
+        if (newZoom < minZoom) newZoom = minZoom;
+        if (newZoom > maxZoom) newZoom = maxZoom;
+        setZoom(newZoom);
     };
 
     const handleMouseDown = (e) => {
@@ -47,7 +52,9 @@ function InputController({camera,children}) {
 
             setNextCameraPosition({
                 x: nextCameraPosition.x - deltaX * panSpeed,
-                y: nextCameraPosition.y + deltaY * panSpeed * (size.width/size.height),
+                y:
+                    nextCameraPosition.y +
+                    deltaY * panSpeed * (size.width / size.height),
                 z: nextCameraPosition.z,
             });
         }
@@ -65,9 +72,10 @@ function InputController({camera,children}) {
             0.06
         );
 
-        camera.zoom = lerp(camera.zoom, zoom,0.05)
-        camera.updateProjectionMatrix()
+        camera.zoom = lerp(camera.zoom, zoom, 0.05);
+        camera.updateProjectionMatrix();
     });
+
 
     return (
         <>
@@ -79,6 +87,7 @@ function InputController({camera,children}) {
                 onPointerMove={handleMouseDrag}
                 onPointerLeave={handleMouseUp}
                 onWheel={updateZoom}
+                {...pinch}
                 scale={[10000, 10000, 1]}
             >
                 <planeGeometry args={[1, 1]} position={[0, 0, -1]} />
