@@ -8,7 +8,7 @@ import InputController from "./InputController";
 function Explorer() {
     return (
         <>
-            <Canvas>
+            <Canvas id="canvas">
                 <OrthographicCamera makeDefault position={[0, 0, 10]} />
                 <ambientLight intensity={6} />
                 <InputController>

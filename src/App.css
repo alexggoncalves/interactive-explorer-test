@@ -7,6 +7,10 @@ body {
     height: 100%;
 }
 
+#canvas {
+    touch-action: auto;
+}
+
 #radial-blur-mask {
     position: fixed;
     top: 0;
@@ -21,15 +25,7 @@ body {
         transparent 30%,
         white 80%
     ); */
-    mask: radial-gradient(
-      circle at center,
-        transparent 30%,
-        white 70%
-    );
-    -webkit-mask: radial-gradient(
-      circle at center,
-        transparent 30%,
-        white 70%
-    );
+    mask: radial-gradient(circle at center, transparent 30%, white 70%);
+    -webkit-mask: radial-gradient(circle at center, transparent 30%, white 70%);
     backdrop-filter: blur(10px);
 }
