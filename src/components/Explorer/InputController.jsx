@@ -10,12 +10,7 @@ const zoomSpeed = 0.0005;
 const panSpeed = 0.8;
 
 function InputController({ canvasRef, children }) {
-    const pinch = usePinch((state) => {
-        zoom=6
-    } ) 
-
     const { size } = useThree();
-    console.log(useThree())
 
     const [isDragging, setDragging] = useState(false);
     const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
@@ -87,7 +82,6 @@ function InputController({ canvasRef, children }) {
                 onPointerMove={handleMouseDrag}
                 onPointerLeave={handleMouseUp}
                 onWheel={updateZoom}
-                {...pinch}
                 scale={[10000, 10000, 1]}
             >
                 <planeGeometry args={[1, 1]} position={[0, 0, -1]} />
